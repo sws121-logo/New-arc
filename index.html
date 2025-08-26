@@ -1,0 +1,690 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Universal Website Builder</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --primary: #4361ee;
+            --secondary: #3a0ca3;
+            --success: #4cc9f0;
+            --light: #f8f9fa;
+            --dark: #212529;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            color: #333;
+            background-color: #f9fafb;
+        }
+
+        .navbar {
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .hero-section {
+            background: linear-gradient(rgba(67, 97, 238, 0.9), rgba(58, 12, 163, 0.9)), url('https://images.unsplash.com/photo-1467232004584-a241de8bcf5d?ixlib=rb-4.0.3&auto=format&fit=crop&w=2000&q=80');
+            background-size: cover;
+            background-position: center;
+            color: white;
+            padding: 100px 0;
+            margin-top: 56px;
+        }
+
+        .section-padding {
+            padding: 80px 0;
+        }
+
+        .template-card {
+            transition: transform 0.3s, box-shadow 0.3s;
+            border-radius: 10px;
+            overflow: hidden;
+            height: 100%;
+        }
+
+        .template-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+        }
+
+        .pricing-card {
+            border-radius: 15px;
+            overflow: hidden;
+            transition: transform 0.3s;
+        }
+
+        .pricing-card:hover {
+            transform: scale(1.03);
+        }
+
+        .feature-icon {
+            font-size: 2.5rem;
+            color: var(--primary);
+            margin-bottom: 1rem;
+        }
+
+        .btn-primary {
+            background-color: var(--primary);
+            border-color: var(--primary);
+        }
+
+        .btn-primary:hover {
+            background-color: var(--secondary);
+            border-color: var(--secondary);
+        }
+
+        .free-badge {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            z-index: 100;
+        }
+
+        .template-img {
+            height: 200px;
+            object-fit: cover;
+        }
+
+        .language-badge {
+            font-size: 0.8rem;
+            margin-right: 5px;
+        }
+
+        footer {
+            background-color: var(--dark);
+            color: white;
+            padding: 60px 0 30px;
+        }
+
+        .builder-container {
+            background-color: white;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            padding: 20px;
+            margin-bottom: 30px;
+        }
+
+        .preview-container {
+            border: 1px solid #dee2e6;
+            border-radius: 5px;
+            min-height: 300px;
+            padding: 15px;
+        }
+
+        .customization-panel {
+            background-color: #f8f9fa;
+            border-radius: 5px;
+            padding: 20px;
+            height: 100%;
+        }
+
+        .auth-container {
+            max-width: 400px;
+            margin: 100px auto;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.1);
+            background-color: white;
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar navbar-expand-lg navbar-dark fixed-top">
+        <div class="container">
+            <a class="navbar-brand" href="#">
+                <i class="fas fa-code me-2"></i>UniversalBuilder
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav me-auto">
+                    <li class="nav-item"><a class="nav-link active" href="#home">Home</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#templates">Templates</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#features">Features</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#pricing">Pricing</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#builder">Website Builder</a></li>
+                </ul>
+                <div class="d-flex">
+                    <a href="#" class="btn btn-outline-light me-2" data-bs-toggle="modal" data-bs-target="#loginModal">Login</a>
+                    <a href="#" class="btn btn-light" data-bs-toggle="modal" data-bs-target="#signupModal">Sign Up</a>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Home Section -->
+    <section id="home" class="hero-section">
+        <div class="container text-center">
+            <h1 class="display-3 fw-bold mb-4">Build Your Website in Minutes</h1>
+            <p class="lead mb-5">The easiest way to create a professional website with no coding required. Free hosting included!</p>
+            <div class="d-flex justify-content-center flex-wrap gap-3">
+                <a href="#templates" class="btn btn-light btn-lg px-4 py-2">Get Started</a>
+                <a href="#features" class="btn btn-outline-light btn-lg px-4 py-2">Learn More</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Templates Section -->
+    <section id="templates" class="section-padding bg-light">
+        <div class="container">
+            <div class="text-center mb-5">
+                <h2 class="fw-bold">Choose a Template</h2>
+                <p class="lead text-muted">Select from our professionally designed templates</p>
+            </div>
+            
+            <div class="row g-4">
+                <!-- Template 1 -->
+                <div class="col-md-6 col-lg-4">
+                    <div class="card template-card">
+                        <span class="free-badge badge bg-success">FREE</span>
+                        <img src="https://images.unsplash.com/photo-1497215728101-856f4ea42174?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" class="card-img-top template-img" alt="Business Template">
+                        <div class="card-body">
+                            <h5 class="card-title">Business Professional</h5>
+                            <p class="card-text">Perfect for corporate websites and business portfolios.</p>
+                            <div class="mb-3">
+                                <span class="badge bg-primary language-badge">HTML</span>
+                                <span class="badge bg-info language-badge">CSS</span>
+                                <span class="badge bg-warning language-badge">JavaScript</span>
+                            </div>
+                            <a href="#builder" class="btn btn-primary w-100">Use Template</a>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Template 2 -->
+                <div class="col-md-6 col-lg-4">
+                    <div class="card template-card">
+                        <span class="free-badge badge bg-success">FREE</span>
+                        <img src="https://images.unsplash.com/photo-1552664730-d307ca884978?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" class="card-img-top template-img" alt="Portfolio Template">
+                        <div class="card-body">
+                            <h5 class="card-title">Creative Portfolio</h5>
+                            <p class="card-text">Showcase your work with this elegant portfolio template.</p>
+                            <div class="mb-3">
+                                <span class="badge bg-primary language-badge">HTML</span>
+                                <span class="badge bg-info language-badge">CSS</span>
+                                <span class="badge bg-warning language-badge">JavaScript</span>
+                            </div>
+                            <a href="#builder" class="btn btn-primary w-100">Use Template</a>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Template 3 -->
+                <div class="col-md-6 col-lg-4">
+                    <div class="card template-card">
+                        <img src="https://images.unsplash.com/photo-1486312338219-ce68d2c6f44d?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" class="card-img-top template-img" alt="E-commerce Template">
+                        <div class="card-body">
+                            <h5 class="card-title">E-Commerce Store</h5>
+                            <p class="card-text">Start selling online with this complete e-commerce solution.</p>
+                            <div class="mb-3">
+                                <span class="badge bg-primary language-badge">HTML</span>
+                                <span class="badge bg-info language-badge">CSS</span>
+                                <span class="badge bg-warning language-badge">JavaScript</span>
+                                <span class="badge bg-secondary language-badge">C++</span>
+                            </div>
+                            <a href="#builder" class="btn btn-outline-primary w-100">Use Template</a>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Template 4 -->
+                <div class="col-md-6 col-lg-4">
+                    <div class="card template-card">
+                        <img src="https://images.unsplash.com/photo-1517245386807-bb43f82c33c4?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" class="card-img-top template-img" alt="Blog Template">
+                        <div class="card-body">
+                            <h5 class="card-title">Blog Platform</h5>
+                            <p class="card-text">Share your thoughts with this modern blogging template.</p>
+                            <div class="mb-3">
+                                <span class="badge bg-primary language-badge">HTML</span>
+                                <span class="badge bg-info language-badge">CSS</span>
+                                <span class="badge bg-warning language-badge">JavaScript</span>
+                                <span class="badge bg-success language-badge">C#</span>
+                            </div>
+                            <a href="#builder" class="btn btn-outline-primary w-100">Use Template</a>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Template 5 -->
+                <div class="col-md-6 col-lg-4">
+                    <div class="card template-card">
+                        <img src="https://images.unsplash.com/photo-1432888498266-38ffec3eaf0a?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" class="card-img-top template-img" alt="Restaurant Template">
+                        <div class="card-body">
+                            <h5 class="card-title">Restaurant</h5>
+                            <p class="card-text">Beautiful template for restaurants and food businesses.</p>
+                            <div class="mb-3">
+                                <span class="badge bg-primary language-badge">HTML</span>
+                                <span class="badge bg-info language-badge">CSS</span>
+                                <span class="badge bg-warning language-badge">JavaScript</span>
+                            </div>
+                            <a href="#builder" class="btn btn-outline-primary w-100">Use Template</a>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Template 6 -->
+                <div class="col-md-6 col-lg-4">
+                    <div class="card template-card">
+                        <span class="free-badge badge bg-success">FREE</span>
+                        <img src="https://images.unsplash.com/photo-1535016120720-40c646be5580?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" class="card-img-top template-img" alt="Event Template">
+                        <div class="card-body">
+                            <h5 class="card-title">Event Page</h5>
+                            <p class="card-text">Promote your event with this stylish and functional template.</p>
+                            <div class="mb-3">
+                                <span class="badge bg-primary language-badge">HTML</span>
+                                <span class="badge bg-info language-badge">CSS</span>
+                                <span class="badge bg-warning language-badge">JavaScript</span>
+                            </div>
+                            <a href="#builder" class="btn btn-primary w-100">Use Template</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Features Section -->
+    <section id="features" class="section-padding">
+        <div class="container">
+            <div class="text-center mb-5">
+                <h2 class="fw-bold">Powerful Features</h2>
+                <p class="lead text-muted">Everything you need to create an amazing website</p>
+            </div>
+            
+            <div class="row g-4">
+                <div class="col-md-4">
+                    <div class="text-center">
+                        <div class="feature-icon">
+                            <i class="fas fa-laptop-code"></i>
+                        </div>
+                        <h4>No-Code Builder</h4>
+                        <p class="text-muted">Create beautiful websites without writing a single line of code with our intuitive drag-and-drop interface.</p>
+                    </div>
+                </div>
+                
+                <div class="col-md-4">
+                    <div class="text-center">
+                        <div class="feature-icon">
+                            <i class="fas fa-mobile-alt"></i>
+                        </div>
+                        <h4>Fully Responsive</h4>
+                        <p class="text-muted">All templates are mobile-friendly and look great on any device, from smartphones to desktops.</p>
+                    </div>
+                </div>
+                
+                <div class="col-md-4">
+                    <div class="text-center">
+                        <div class="feature-icon">
+                            <i class="fas fa-cloud-upload-alt"></i>
+                        </div>
+                        <h4>Free Hosting</h4>
+                        <p class="text-muted">Get free hosting with SSL certificate for your first two websites. No hidden costs.</p>
+                    </div>
+                </div>
+                
+                <div class="col-md-4">
+                    <div class="text-center">
+                        <div class="feature-icon">
+                            <i class="fas fa-palette"></i>
+                        </div>
+                        <h4>Easy Customization</h4>
+                        <p class="text-muted">Change colors, fonts, and layouts with simple controls. No design skills needed.</p>
+                    </div>
+                </div>
+                
+                <div class="col-md-4">
+                    <div class="text-center">
+                        <div class="feature-icon">
+                            <i class="fas fa-bolt"></i>
+                        </div>
+                        <h4>Fast Performance</h4>
+                        <p class="text-muted">Websites built with our platform are optimized for speed and performance.</p>
+                    </div>
+                </div>
+                
+                <div class="col-md-4">
+                    <div class="text-center">
+                        <div class="feature-icon">
+                            <i class="fas fa-language"></i>
+                        </div>
+                        <h4>Multi-Language Support</h4>
+                        <p class="text-muted">Build websites with HTML, CSS, JavaScript, C++, C#, and more specialized languages.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Pricing Section -->
+    <section id="pricing" class="section-padding bg-light">
+        <div class="container">
+            <div class="text-center mb-5">
+                <h2 class="fw-bold">Simple Pricing</h2>
+                <p class="lead text-muted">Choose the plan that works best for you</p>
+            </div>
+            
+            <div class="row g-4 justify-content-center">
+                <!-- Free Plan -->
+                <div class="col-md-5 col-lg-4">
+                    <div class="card pricing-card h-100">
+                        <div class="card-header bg-success text-white text-center py-4">
+                            <h3>Free</h3>
+                            <div class="display-4 fw-bold">$0</div>
+                            <p>Forever</p>
+                        </div>
+                        <div class="card-body">
+                            <ul class="list-group list-group-flush">
+                                <li class="list-group-item"><i class="fas fa-check text-success me-2"></i> 2 Free Websites</li>
+                                <li class="list-group-item"><i class="fas fa-check text-success me-2"></i> Free Hosting & SSL</li>
+                                <li class="list-group-item"><i class="fas fa-check text-success me-2"></i> Basic Templates</li>
+                                <li class="list-group-item"><i class="fas fa-check text-success me-2"></i> 1 GB Storage</li>
+                                <li class="list-group-item"><i class="fas fa-check text-success me-2"></i> 10 GB Bandwidth</li>
+                                <li class="list-group-item"><i class="fas fa-times text-danger me-2"></i> Advanced Features</li>
+                                <li class="list-group-item"><i class="fas fa-times text-danger me-2"></i> Priority Support</li>
+                            </ul>
+                        </div>
+                        <div class="card-footer bg-white text-center py-3">
+                            <a href="#" class="btn btn-success btn-lg w-100" data-bs-toggle="modal" data-bs-target="#signupModal">Get Started</a>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Pro Plan -->
+                <div class="col-md-5 col-lg-4">
+                    <div class="card pricing-card h-100 border-primary">
+                        <div class="card-header bg-primary text-white text-center py-4">
+                            <h3>Pro</h3>
+                            <div class="display-4 fw-bold">$9</div>
+                            <p>per month</p>
+                        </div>
+                        <div class="card-body">
+                            <ul class="list-group list-group-flush">
+                                <li class="list-group-item"><i class="fas fa-check text-success me-2"></i> Unlimited Websites</li>
+                                <li class="list-group-item"><i class="fas fa-check text-success me-2"></i> Free Hosting & SSL</li>
+                                <li class="list-group-item"><i class="fas fa-check text-success me-2"></i> All Templates</li>
+                                <li class="list-group-item"><i class="fas fa-check text-success me-2"></i> 10 GB Storage</li>
+                                <li class="list-group-item"><i class="fas fa-check text-success me-2"></i> 100 GB Bandwidth</li>
+                                <li class="list-group-item"><i class="fas fa-check text-success me-2"></i> Advanced Features</li>
+                                <li class="list-group-item"><i class="fas fa-check text-success me-2"></i> Priority Support</li>
+                            </ul>
+                        </div>
+                        <div class="card-footer bg-white text-center py-3">
+                            <a href="#" class="btn btn-primary btn-lg w-100">Upgrade to Pro</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Website Builder Section -->
+    <section id="builder" class="section-padding">
+        <div class="container">
+            <div class="text-center mb-5">
+                <h2 class="fw-bold">Website Builder</h2>
+                <p class="lead text-muted">Customize your selected template in real-time</p>
+            </div>
+            
+            <div class="builder-container">
+                <div class="row">
+                    <div class="col-md-8">
+                        <div class="preview-container">
+                            <h3 class="text-center mb-4">Live Preview</h3>
+                            <div class="text-center">
+                                <p>Select a template to begin customization</p>
+                                <a href="#templates" class="btn btn-primary">Choose Template</a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="customization-panel">
+                            <h4 class="mb-4">Customization Options</h4>
+                            
+                            <div class="mb-3">
+                                <label class="form-label">Website Title</label>
+                                <input type="text" class="form-control" placeholder="Enter website title">
+                            </div>
+                            
+                            <div class="mb-3">
+                                <label class="form-label">Primary Color</label>
+                                <input type="color" class="form-control form-control-color" value="#4361ee">
+                            </div>
+                            
+                            <div class="mb-3">
+                                <label class="form-label">Font Family</label>
+                                <select class="form-select">
+                                    <option selected>Open Sans</option>
+                                    <option>Roboto</option>
+                                    <option>Montserrat</option>
+                                    <option>Lato</option>
+                                </select>
+                            </div>
+                            
+                            <div class="mb-3">
+                                <label class="form-label">Layout</label>
+                                <select class="form-select">
+                                    <option selected>Boxed</option>
+                                    <option>Wide</option>
+                                    <option>Full Width</option>
+                                </select>
+                            </div>
+                            
+                            <div class="mb-3">
+                                <label class="form-label">Header Style</label>
+                                <select class="form-select">
+                                    <option selected>Standard</option>
+                                    <option>Fixed</option>
+                                    <option>Transparent</option>
+                                </select>
+                            </div>
+                            
+                            <div class="d-grid gap-2">
+                                <button class="btn btn-primary">Publish Website</button>
+                                <button class="btn btn-outline-secondary">Save Draft</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="text-center mt-4">
+                <h3>Supported Programming Languages</h3>
+                <div class="d-flex justify-content-center flex-wrap gap-2 mt-3">
+                    <span class="badge bg-primary p-2">HTML</span>
+                    <span class="badge bg-info p-2">CSS</span>
+                    <span class="badge bg-warning p-2">JavaScript</span>
+                    <span class="badge bg-secondary p-2">C++</span>
+                    <span class="badge bg-success p-2">C#</span>
+                    <span class="badge bg-danger p-2">Python</span>
+                    <span class="badge bg-dark p-2">PHP</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-4 mb-4 mb-lg-0">
+                    <h4 class="text-white mb-4">UniversalBuilder</h4>
+                    <p>The easiest way to create professional websites with no coding required. Free hosting included for your first two websites.</p>
+                    <div class="d-flex gap-3 mt-3">
+                        <a href="#" class="text-white"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#" class="text-white"><i class="fab fa-twitter"></i></a>
+                        <a href="#" class="text-white"><i class="fab fa-instagram"></i></a>
+                        <a href="#" class="text-white"><i class="fab fa-linkedin-in"></i></a>
+                    </div>
+                </div>
+                <div class="col-lg-2 col-md-4 mb-4 mb-md-0">
+                    <h5 class="text-white mb-4">Quick Links</h5>
+                    <ul class="list-unstyled">
+                        <li class="mb-2"><a href="#home" class="text-white text-decoration-none">Home</a></li>
+                        <li class="mb-2"><a href="#templates" class="text-white text-decoration-none">Templates</a></li>
+                        <li class="mb-2"><a href="#features" class="text-white text-decoration-none">Features</a></li>
+                        <li class="mb-2"><a href="#pricing" class="text-white text-decoration-none">Pricing</a></li>
+                    </ul>
+                </div>
+                <div class="col-lg-2 col-md-4 mb-4 mb-md-0">
+                    <h5 class="text-white mb-4">Support</h5>
+                    <ul class="list-unstyled">
+                        <li class="mb-2"><a href="#" class="text-white text-decoration-none">Help Center</a></li>
+                        <li class="mb-2"><a href="#" class="text-white text-decoration-none">FAQs</a></li>
+                        <li class="mb-2"><a href="#" class="text-white text-decoration-none">Documentation</a></li>
+                        <li class="mb-2"><a href="#" class="text-white text-decoration-none">Contact Us</a></li>
+                    </ul>
+                </div>
+                <div class="col-lg-4 col-md-4">
+                    <h5 class="text-white mb-4">Newsletter</h5>
+                    <p class="text-white">Subscribe to our newsletter for updates and offers</p>
+                    <form>
+                        <div class="input-group">
+                            <input type="email" class="form-control" placeholder="Your email address">
+                            <button class="btn btn-primary" type="button">Subscribe</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+            <hr class="mt-4 mb-4">
+            <div class="text-center">
+                <p class="mb-0">&copy; 2023 UniversalBuilder. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Login Modal -->
+    <div class="modal fade" id="loginModal" tabindex="-1" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="auth-container">
+                <h2 class="text-center mb-4">Login to Your Account</h2>
+                <form>
+                    <div class="mb-3">
+                        <label class="form-label">Email address</label>
+                        <input type="email" class="form-control" placeholder="Enter your email">
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label">Password</label>
+                        <input type="password" class="form-control" placeholder="Enter your password">
+                    </div>
+                    <div class="mb-3 form-check">
+                        <input type="checkbox" class="form-check-input" id="rememberMe">
+                        <label class="form-check-label" for="rememberMe">Remember me</label>
+                    </div>
+                    <div class="d-grid gap-2">
+                        <button type="submit" class="btn btn-primary">Login</button>
+                    </div>
+                </form>
+                <div class="text-center mt-3">
+                    <p>Or login with</p>
+                    <button class="btn btn-outline-danger me-2"><i class="fab fa-google me-2"></i>Google</button>
+                    <button class="btn btn-outline-dark"><i class="fab fa-github me-2"></i>GitHub</button>
+                </div>
+                <hr class="my-4">
+                <div class="text-center">
+                    <p>Don't have an account? <a href="#" data-bs-toggle="modal" data-bs-target="#signupModal" data-bs-dismiss="modal">Sign up</a></p>
+                    <p><a href="#">Forgot your password?</a></p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Signup Modal -->
+    <div class="modal fade" id="signupModal" tabindex="-1" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="auth-container">
+                <h2 class="text-center mb-4">Create an Account</h2>
+                <form>
+                    <div class="mb-3">
+                        <label class="form-label">Full Name</label>
+                        <input type="text" class="form-control" placeholder="Enter your full name">
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label">Email address</label>
+                        <input type="email" class="form-control" placeholder="Enter your email">
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label">Password</label>
+                        <input type="password" class="form-control" placeholder="Create a password">
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label">Confirm Password</label>
+                        <input type="password" class="form-control" placeholder="Confirm your password">
+                    </div>
+                    <div class="mb-3 form-check">
+                        <input type="checkbox" class="form-check-input" id="terms">
+                        <label class="form-check-label" for="terms">I agree to the <a href="#">Terms of Service</a> and <a href="#">Privacy Policy</a></label>
+                    </div>
+                    <div class="d-grid gap-2">
+                        <button type="submit" class="btn btn-primary">Sign Up</button>
+                    </div>
+                </form>
+                <div class="text-center mt-3">
+                    <p>Or sign up with</p>
+                    <button class="btn btn-outline-danger me-2"><i class="fab fa-google me-2"></i>Google</button>
+                    <button class="btn btn-outline-dark"><i class="fab fa-github me-2"></i>GitHub</button>
+                </div>
+                <hr class="my-4">
+                <div class="text-center">
+                    <p>Already have an account? <a href="#" data-bs-toggle="modal" data-bs-target="#loginModal" data-bs-dismiss="modal">Login</a></p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+        // Simple script to handle template selection and preview
+        document.addEventListener('DOMContentLoaded', function() {
+            // Template selection
+            const templateLinks = document.querySelectorAll('a[href="#builder"]');
+            templateLinks.forEach(link => {
+                link.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    
+                    // Get template details
+                    const card = this.closest('.card');
+                    const title = card.querySelector('.card-title').textContent;
+                    const isFree = card.querySelector('.free-badge');
+                    
+                    // Update preview message
+                    const previewContainer = document.querySelector('.preview-container');
+                    previewContainer.innerHTML = `
+                        <h3 class="text-center mb-4">Live Preview - ${title}</h3>
+                        <div class="text-center">
+                            <p>Now customizing: <strong>${title}</strong></p>
+                            ${isFree ? '<span class="badge bg-success mb-3">Free Template</span>' : ''}
+                            <p class="mt-3">Use the options on the right to customize your website.</p>
+                        </div>
+                    `;
+                    
+                    // Scroll to builder section
+                    document.getElementById('builder').scrollIntoView({behavior: 'smooth'});
+                });
+            });
+            
+            // Basic form validation for auth modals
+            const authForms = document.querySelectorAll('.auth-container form');
+            authForms.forEach(form => {
+                form.addEventListener('submit', function(e) {
+                    e.preventDefault();
+                    alert('This is a demo. Form submission would normally process login/signup.');
+                });
+            });
+            
+            // Google login button
+            const googleButtons = document.querySelectorAll('.btn-outline-danger');
+            googleButtons.forEach(button => {
+                button.addEventListener('click', function() {
+                    alert('This would normally redirect to Google OAuth authentication.');
+                });
+            });
+        });
+    </script>
+</body>
+</html>
